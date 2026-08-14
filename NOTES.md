@@ -6,8 +6,16 @@ the reasoning nearly went wrong — which matters more if you are extending it.
 
 ## Where this started
 
-The A2687 charger was already decoded. The power bank was a guess: it advertised
-the same `0xff09` service UUID, so the transport was probably identical.
+The A2687 charger was already decoded — not by me. That work is
+[Hyper-Beast/Anker_Prime_160W_WebBLE](https://github.com/Hyper-Beast/Anker_Prime_160W_WebBLE),
+a Web Bluetooth page whose `AnkerPrimeWebBle_A2687.js` is where the framing,
+crypto constants and handshake sequence in this repository come from; it credits
+flip-dots/SolixBLE and atc1441/Anker_Prime_BLE_hacking before it. Starting from
+a working charger implementation is the only reason the power bank took an
+afternoon rather than a fortnight.
+
+The power bank was a guess: it advertised the same `0xff09` service UUID, so the
+transport was probably identical.
 
 It was. The charger's handshake worked verbatim — same GATT service, same
 framing, same fixed-key AES-GCM, same ECDH P-256 exchange on `0x0021`. Within

@@ -1,8 +1,9 @@
 """Anker Prime 160W charger — model A2687 — telemetry decoding.
 
-Ported from a Python service that in turn came from `AnkerPrimeWebBle_A2687.js`,
-reshaped here to the same interface the power bank decoder uses so one CLI can
-drive either.
+Ported from a Python service that in turn came from `AnkerPrimeWebBle_A2687.js`
+(https://github.com/Hyper-Beast/Anker_Prime_160W_WebBLE), reshaped here to the
+same interface the power bank decoder uses so one CLI can drive either. The
+cable-capability and charging-protocol tables below are that project's.
 
 Telemetry only. Nothing here changes a charger setting; the only writes are the
 session handshake and the `0x0200` status read.

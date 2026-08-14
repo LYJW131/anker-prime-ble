@@ -1,9 +1,16 @@
 # Anker Prime 160W charger — A2687
 
 Field map for the charger's telemetry. This decoder predates the power bank work
-and came from a Python port of `AnkerPrimeWebBle_A2687.js`; it is included here
+and began as a Python port of `AnkerPrimeWebBle_A2687.js` from
+[Hyper-Beast/Anker_Prime_160W_WebBLE](https://github.com/Hyper-Beast/Anker_Prime_160W_WebBLE),
+which is the origin of the framing, crypto constants and cable tables used here
+— see [Prior work](../README.md#prior-work). It is included in this repository
 because the two devices share their entire transport, and because having both in
 one place is what made the shared layer obvious.
+
+Everything below that is marked as observed was re-verified against hardware;
+where this decoder now disagrees with its upstream, the disagreement is called
+out with the capture that caused it.
 
 | | |
 |---|---|

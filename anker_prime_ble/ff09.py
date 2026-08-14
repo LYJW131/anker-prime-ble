@@ -5,10 +5,13 @@ below the telemetry layer, and nothing above it. The power bank and the A2687
 charger run this identically; only what they pack *inside* the TLVs differs, so
 this module knows nothing about ports, batteries, or watts.
 
-Derived from a Python port of `AnkerPrimeWebBle_A2687.js` written for the A2687
-charger, reduced here to the parts that are device-independent.
+Derived from a Python port of `AnkerPrimeWebBle_A2687.js`
+(https://github.com/Hyper-Beast/Anker_Prime_160W_WebBLE), written for the A2687
+charger and reduced here to the parts that are device-independent. That project
+credits flip-dots/SolixBLE and atc1441/Anker_Prime_BLE_hacking in turn, and
+states no license — see the Prior work section of the README.
 
-Pure logic — no BLE, no I/O. `probe.py` supplies the transport.
+Pure logic — no BLE, no I/O. `session.py` supplies the transport.
 """
 
 from __future__ import annotations

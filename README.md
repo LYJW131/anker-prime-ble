@@ -94,6 +94,24 @@ a command sits waiting.
   are the evidence behind the field maps and double as regression fixtures:
   change a decoder, replay all of them, see whether they still make sense.
 
+## Prior work
+
+The charger side of this repository would not exist without
+**[Hyper-Beast/Anker_Prime_160W_WebBLE](https://github.com/Hyper-Beast/Anker_Prime_160W_WebBLE)**
+— a Web Bluetooth telemetry page for the A2687. Its `AnkerPrimeWebBle_A2687.js`
+is where the FF09 framing, the fixed AES-GCM key and IV, the ECDH handshake
+sequence and the cable-code tables in `ff09.py` and `charger.py` originally come
+from. This repository's charger decoder began as a Python port of it, and the
+power bank work started by pointing that same handshake at a different device
+and finding it worked unchanged.
+
+That project in turn credits [flip-dots/SolixBLE](https://github.com/flip-dots/SolixBLE)
+and [atc1441/Anker_Prime_BLE_hacking](https://github.com/atc1441/Anker_Prime_BLE_hacking).
+
+Note that the upstream repository states no license, so there is no explicit
+grant covering the parts derived from it. Keep that in mind before publishing
+this one.
+
 ## Status
 
 Both devices are decoded and confirmed against hardware, including the charger's
