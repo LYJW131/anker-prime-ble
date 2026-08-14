@@ -101,6 +101,26 @@ class PortReading:
         """Rail up, nothing drawing — how the power bank's trickle mode looks."""
         return not self.active and bool(self.voltage_v and self.voltage_v > 0.1)
 
+    def to_dict(self) -> dict:
+        """Canonical form. This is the cross-language contract: a fixture is a
+        recording of these, and any other implementation of this protocol has to
+        reproduce them byte-for-byte from the same capture."""
+        return {
+            "name": self.name.strip(),
+            "mode": self.mode,
+            "direction": self.direction,
+            "active": self.active,
+            "attached": self.attached,
+            "energized": self.energized,
+            "voltage_v": self.voltage_v,
+            "current_a": self.current_a,
+            "power_w": self.power_w,
+            "cable": self.cable,
+            "charging_info": self.charging_info,
+            "device_name": self.device_name,
+            "vendor": self.vendor,
+        }
+
     def summary(self) -> str:
         if self.active:
             arrow = ""
@@ -136,6 +156,15 @@ class DeviceState:
     # Every TLV with no confirmed meaning, as raw hex, so a later capture can be
     # diffed against this one without going back to the radio.
     unknown: dict[str, str] = field(default_factory=dict)
+
+    def to_dict(self) -> dict:
+        return {
+            "serial": self.serial,
+            "firmware": self.firmware,
+            "mac_address": self.mac_address,
+            "label": self.label,
+            "ports": [p.to_dict() for p in self.ports],
+        }
 
     def header(self) -> str:
         text = self.serial or "(unknown device)"

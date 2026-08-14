@@ -1,0 +1,2286 @@
+{
+ "capture": "charger-02.jsonl",
+ "device": "charger",
+ "frames": [
+  {
+   "offset_s": 0.329,
+   "command": 41,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": null,
+      "current_a": null,
+      "power_w": null,
+      "cable": null,
+      "charging_info": null,
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": null,
+      "current_a": null,
+      "power_w": null,
+      "cable": null,
+      "charging_info": null,
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": null,
+      "current_a": null,
+      "power_w": null,
+      "cable": null,
+      "charging_info": null,
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": null
+   }
+  },
+  {
+   "offset_s": 2.009,
+   "command": 512,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.088,
+      "current_a": 4.455,
+      "power_w": 89.35,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.35
+   }
+  },
+  {
+   "offset_s": 2.129,
+   "command": 522,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.088,
+      "current_a": 4.455,
+      "power_w": 89.35,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.35
+   }
+  },
+  {
+   "offset_s": 2.31,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.088,
+      "current_a": 4.455,
+      "power_w": 89.35,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.35
+   }
+  },
+  {
+   "offset_s": 3.299,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.072,
+      "current_a": 4.457,
+      "power_w": 89.31,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.31
+   }
+  },
+  {
+   "offset_s": 4.291,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.072,
+      "current_a": 4.451,
+      "power_w": 89.31,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.31
+   }
+  },
+  {
+   "offset_s": 5.312,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.072,
+      "current_a": 4.449,
+      "power_w": 89.11,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.11
+   }
+  },
+  {
+   "offset_s": 6.364,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.452,
+      "power_w": 89.35,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.35
+   }
+  },
+  {
+   "offset_s": 7.354,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.455,
+      "power_w": 89.35,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.35
+   }
+  },
+  {
+   "offset_s": 8.343,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.072,
+      "current_a": 4.454,
+      "power_w": 89.31,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.31
+   }
+  },
+  {
+   "offset_s": 9.333,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.46,
+      "power_w": 89.55,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.55
+   }
+  },
+  {
+   "offset_s": 10.325,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.452,
+      "power_w": 89.35,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.35
+   }
+  },
+  {
+   "offset_s": 11.437,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.072,
+      "current_a": 4.451,
+      "power_w": 89.31,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.31
+   }
+  },
+  {
+   "offset_s": 12.304,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.455,
+      "power_w": 89.35,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.35
+   }
+  },
+  {
+   "offset_s": 13.294,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.466,
+      "power_w": 89.55,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.55
+   }
+  },
+  {
+   "offset_s": 14.283,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.072,
+      "current_a": 4.459,
+      "power_w": 89.31,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.31
+   }
+  },
+  {
+   "offset_s": 15.401,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.449,
+      "power_w": 89.15,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.15
+   }
+  },
+  {
+   "offset_s": 16.387,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.449,
+      "power_w": 89.15,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.15
+   }
+  },
+  {
+   "offset_s": 17.377,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.072,
+      "current_a": 4.444,
+      "power_w": 89.11,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.11
+   }
+  },
+  {
+   "offset_s": 18.367,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.45,
+      "power_w": 89.35,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.35
+   }
+  },
+  {
+   "offset_s": 19.362,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.431,
+      "power_w": 88.95,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 88.95
+   }
+  },
+  {
+   "offset_s": 20.471,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.088,
+      "current_a": 4.405,
+      "power_w": 88.35,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 88.35
+   }
+  },
+  {
+   "offset_s": 21.337,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.438,
+      "power_w": 88.95,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 88.95
+   }
+  },
+  {
+   "offset_s": 22.327,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.452,
+      "power_w": 89.35,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.35
+   }
+  },
+  {
+   "offset_s": 23.317,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.072,
+      "current_a": 4.45,
+      "power_w": 89.31,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.31
+   }
+  },
+  {
+   "offset_s": 24.308,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.451,
+      "power_w": 89.35,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.35
+   }
+  },
+  {
+   "offset_s": 25.421,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.072,
+      "current_a": 4.459,
+      "power_w": 89.31,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.31
+   }
+  },
+  {
+   "offset_s": 26.287,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.449,
+      "power_w": 89.15,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.15
+   }
+  },
+  {
+   "offset_s": 27.649,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.096,
+      "current_a": 4.42,
+      "power_w": 88.79,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 88.79
+   }
+  },
+  {
+   "offset_s": 28.267,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.434,
+      "power_w": 88.95,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 88.95
+   }
+  },
+  {
+   "offset_s": 29.387,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.088,
+      "current_a": 4.392,
+      "power_w": 88.15,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 88.15
+   }
+  },
+  {
+   "offset_s": 30.495,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.379,
+      "power_w": 87.74,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 87.74
+   }
+  },
+  {
+   "offset_s": 31.61,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.432,
+      "power_w": 88.95,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 88.95
+   }
+  },
+  {
+   "offset_s": 32.351,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.088,
+      "current_a": 3.845,
+      "power_w": 77.1,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 77.1
+   }
+  },
+  {
+   "offset_s": 33.34,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.088,
+      "current_a": 4.113,
+      "power_w": 82.52,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 82.52
+   }
+  },
+  {
+   "offset_s": 34.454,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.447,
+      "power_w": 89.15,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.15
+   }
+  },
+  {
+   "offset_s": 35.32,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.08,
+      "current_a": 4.445,
+      "power_w": 89.15,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.15
+   }
+  },
+  {
+   "offset_s": 36.31,
+   "command": 768,
+   "state": {
+    "serial": "ASHDJW7CF49200487",
+    "firmware": "v0.0.5.1",
+    "mac_address": "7C:E9:13:77:C3:64",
+    "label": "Charging",
+    "ports": [
+     {
+      "name": "C1",
+      "mode": 1,
+      "direction": "out",
+      "active": true,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 20.072,
+      "current_a": 4.451,
+      "power_w": 89.31,
+      "cable": "EPR-240W MAX",
+      "charging_info": "Apple PD Fast Charging",
+      "device_name": "MacBook Pro series",
+      "vendor": "Apple"
+     },
+     {
+      "name": "C2",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     },
+     {
+      "name": "C3",
+      "mode": 0,
+      "direction": null,
+      "active": false,
+      "attached": false,
+      "energized": false,
+      "voltage_v": 0.0,
+      "current_a": 0.0,
+      "power_w": 0.0,
+      "cable": "N/A",
+      "charging_info": "N/A",
+      "device_name": null,
+      "vendor": null
+     }
+    ],
+    "product_code": null,
+    "firmware_tag": null,
+    "total_output_power_w": 89.31
+   }
+  }
+ ]
+}

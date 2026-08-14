@@ -87,12 +87,24 @@ a command sits waiting.
 - **[docs/powerbank.md](docs/powerbank.md)** — A110G field map with the evidence
   for each field.
 - **[docs/charger.md](docs/charger.md)** — A2687 field map.
+- **[spec/](spec/)** — the cross-language contract: generated constants for
+  Swift, and a decoded-state fixture per capture. Other implementations replay
+  the fixtures and must reproduce them field for field, which is what stops a
+  reimplementation from drifting on what a byte *means*.
 - **[captures/](captures/)** — 13 recorded sessions: eleven power bank ones
   covering charge, discharge, pass-through, dual output, thermal throttling and a
   firmware upgrade, plus two charger sessions with and without an account ID.
   These
   are the evidence behind the field maps and double as regression fixtures:
   change a decoder, replay all of them, see whether they still make sense.
+
+## Reimplementing this elsewhere
+
+The macOS reporter that consumes this protocol is native Swift doing
+CoreBluetooth in-process, so it cannot share code with Python. It shares the
+contract in [spec/](spec/) instead: generated constants, plus fixtures it replays
+as a conformance test. `python3 tools/contract.py verify` fails if either has
+gone stale against the Python modules.
 
 ## Prior work
 

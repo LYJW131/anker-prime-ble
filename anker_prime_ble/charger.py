@@ -120,6 +120,17 @@ class ChargerState(DeviceState):
         if not self.ports:
             self.ports = [PortReading(name=key) for key in _PORT_ORDER]
 
+    def to_dict(self) -> dict:
+        data = super().to_dict()
+        data.update(
+            {
+                "product_code": self.product_code,
+                "firmware_tag": self.firmware_tag,
+                "total_output_power_w": self.total_output_power_w,
+            }
+        )
+        return data
+
     def port(self, key: str) -> PortReading:
         for reading in self.ports:
             if reading.name == key:

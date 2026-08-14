@@ -1,0 +1,187 @@
+{
+  "_generated_by": "tools/contract.py \u2014 do not edit; edit the Python modules",
+  "transport": {
+    "service_uuid": "8c850001-0302-41c5-b46e-cf057c562025",
+    "write_characteristic_uuid": "8c850002-0302-41c5-b46e-cf057c562025",
+    "notify_characteristic_uuid": "8c850003-0302-41c5-b46e-cf057c562025",
+    "advertised_service_uuid": "0000ff09-0000-1000-8000-00805f9b34fb",
+    "initial_key": "b8ff7422955d4eb6d554a2c470280559",
+    "initial_iv": "6ba3e3f2f3a60f2971ce5d1f",
+    "gcm_aad": "3322110077665544bbaa9988ffeeddcc",
+    "flag_encrypted": 64,
+    "flag_ack": 8,
+    "group_session": 1,
+    "group_telemetry": 15,
+    "command_status": 512,
+    "command_realtime": 522
+  },
+  "devices": {
+    "charger": {
+      "name": "Anker Prime 160W charger \u2014 A2687",
+      "name_prefix": "ASHDJW",
+      "needs_account_id": true,
+      "realtime_commands": [
+        518,
+        519,
+        522,
+        768,
+        771,
+        1040,
+        17152
+      ],
+      "snapshot_commands": [
+        64,
+        512,
+        1029,
+        2560
+      ],
+      "ports": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "tlv": {
+        "port_struct": {
+          "0xA5": "C1",
+          "0xA6": "C2",
+          "0xA7": "C3"
+        },
+        "port_cable": {
+          "0xAC": "C1",
+          "0xAD": "C2",
+          "0xAE": "C3"
+        },
+        "identity": "0xB4",
+        "brand_model": "0xB5"
+      },
+      "scale": {
+        "voltage": "millivolts",
+        "current": "milliamps",
+        "power": "centiwatts"
+      },
+      "tables": {
+        "cable_capability": {
+          "00": "3A-60W MAX",
+          "01": "5A-100W MAX",
+          "02": "EPR-240W MAX"
+        },
+        "charging_info": {
+          "01": "Apple PD Fast Charging",
+          "02": "Samsung Fast Charging",
+          "03": "Samsung Super Fast Charging"
+        },
+        "vendor_names": {
+          "0x05AC": "Apple",
+          "0x04E8": "Samsung",
+          "0x2717": "Xiaomi",
+          "0x12D1": "Huawei",
+          "0x18D1": "Google",
+          "0x1004": "LG",
+          "0x0451": "Texas Instruments",
+          "0x291A": "Anker",
+          "0x03F0": "HP",
+          "0x413C": "Dell",
+          "0x17EF": "Lenovo",
+          "0x045E": "Microsoft",
+          "0x0B05": "ASUS",
+          "0x0DB0": "MSI",
+          "0x1532": "Razer"
+        },
+        "device_models": {
+          "0x05AC:0x7519": "iPhone 17 series",
+          "0x05AC:0x7319": "MacBook Pro series",
+          "0x05AC:0x7117": "iPad Pro series",
+          "0x291A:0x110B": "20K Prime Power Bank"
+        },
+        "brand_codes": {
+          "0x01": "Apple",
+          "0x02": "Samsung",
+          "0x03": "Xiaomi",
+          "0x04": "Huawei",
+          "0x05": "Google",
+          "0x06": "LG",
+          "0x07": "IDT",
+          "0x08": "TI",
+          "0x09": "YBZ",
+          "0x0A": "Anker",
+          "0x0B": "Honor",
+          "0x0C": "HP",
+          "0x0D": "Dell",
+          "0x0E": "Lenovo",
+          "0x0F": "Microsoft",
+          "0x10": "ASUS",
+          "0x11": "ASUS",
+          "0x12": "MSI",
+          "0x13": "Razer"
+        },
+        "identity_sentinels": [
+          "0x0000",
+          "0xFFFA",
+          "0xFFFB",
+          "0xFFFC",
+          "0xFFFD",
+          "0xFFFE",
+          "0xFFFF"
+        ]
+      }
+    },
+    "powerbank": {
+      "name": "Anker Prime Power Bank (20K, 220W) \u2014 A110G",
+      "name_prefix": null,
+      "needs_account_id": false,
+      "realtime_commands": [
+        768
+      ],
+      "snapshot_commands": [
+        512
+      ],
+      "ports": [
+        "C1",
+        "C2",
+        "A"
+      ],
+      "tlv": {
+        "state": "0xA1",
+        "battery": "0xA2",
+        "time_left": "0xA3",
+        "thermal_state": "0xA4",
+        "input_total": "0xA5",
+        "output_total": "0xA6",
+        "dock": "0xA7",
+        "port_c1": "0xA8",
+        "port_c2": "0xA9",
+        "port_a": "0xAC",
+        "temperature_1": "0xAF",
+        "temperature_2": "0xB0"
+      },
+      "snapshot": {
+        "shift": 13,
+        "state": "0xA1",
+        "battery": "0xA6",
+        "time_left": "0xA7",
+        "pomodoro_seconds": "0xAC",
+        "pomodoro_enable": "0xE2"
+      },
+      "scale": {
+        "voltage": "tenths",
+        "current": "tenths",
+        "power": "tenths"
+      },
+      "encodings": {
+        "battery_percent": "decimal_pair",
+        "time_left": "flag_hours_minutes"
+      },
+      "direction": {
+        "1": "out",
+        "2": "in"
+      },
+      "port_block": {
+        "power_slot_is_sticky": true,
+        "attach_flag_offset": 8,
+        "attach_flag_present": "0x07",
+        "source_role_offset": 7,
+        "source_role_sourcing": "0x02"
+      }
+    }
+  }
+}

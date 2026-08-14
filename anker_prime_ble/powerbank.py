@@ -95,6 +95,28 @@ class PowerBankState(DeviceState):
     pomodoro_seconds: Optional[int] = None
     pomodoro_enabled: Optional[bool] = None
 
+    def to_dict(self) -> dict:
+        data = super().to_dict()
+        data.update(
+            {
+                "state_code": self.state_code,
+                "thermal_state": self.thermal_state,
+                "thermal_limited": self.thermal_limited,
+                "battery_percent": self.battery_percent,
+                "charging": self.charging,
+                "time_left_hours": self.time_left_hours,
+                "time_left_minutes": self.time_left_minutes,
+                "input_power_w": self.input_power_w,
+                "output_power_w": self.output_power_w,
+                "dock": self.dock.to_dict() if self.dock else None,
+                "temperature_1_c": self.temperature_1_c,
+                "temperature_2_c": self.temperature_2_c,
+                "pomodoro_seconds": self.pomodoro_seconds,
+                "pomodoro_enabled": self.pomodoro_enabled,
+            }
+        )
+        return data
+
     @property
     def thermal_limited(self) -> bool:
         """True while the bank refuses to charge because it is too hot."""
