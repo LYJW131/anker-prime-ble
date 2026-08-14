@@ -43,14 +43,19 @@ Still unidentified, with the values seen so far:
 |---|---|---|
 | `0xA2` | `1605` → `1707` | moves slowly and cumulatively; a lifetime counter of some kind |
 | `0xA3` | `7` | constant across every capture |
-| `0xA9`, `0xAA` | `100`, `100` | two settings pinned at 100 |
+| `0xA9` | `100` | **battery health**, whole percent |
+| `0xAA` | `100` → `30` | **screen brightness**, matching the app's slider |
 | `0xAB` | `0x80` | flag byte |
 | `0xE0` | `0x3F` → `7FFFFFFF` | the firmware update widened this from 1 byte to 4 |
 | `0xBE` | `5` → `6` | increments across sessions |
 
-Battery health and cycle count were the obvious guesses for `0xA3`/`0xA9`/`0xAA`,
-but the Anker app for this model shows neither, so there is no ground truth to
-match them against and they stay unidentified rather than plausibly labelled.
+`0xA9` and `0xAA` were separated by moving one of them. Both read 100 in all
+eleven captures, and the app reports battery health as 100% — which fit either
+equally, so no amount of re-reading the captures could have decided it. Setting
+screen brightness to 30 in the app moved `0xAA` to 30 and left `0xA9` at 100.
+
+`0xA3` stays unidentified. Cycle count is the obvious guess and 7 is plausible
+for a nearly new bank, but nothing observable has moved it, so it is a guess.
 
 Untested hardware path: the 150 W A1903 base, which unlike the 100 W A1902
 allows output while the bank is docked.

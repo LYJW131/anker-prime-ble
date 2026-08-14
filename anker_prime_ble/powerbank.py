@@ -68,6 +68,13 @@ SNAPSHOT_TIME_LEFT = 0xA7
 # was set in the app. 0xE2 repeats it behind an enable flag.
 SNAPSHOT_POMODORO_SECONDS = 0xAC
 SNAPSHOT_POMODORO_ENABLE = 0xE2
+# Battery health, as a whole percent. Confirmed by elimination: it and 0xAA both
+# read 100 in every capture, and setting the app's screen brightness to 30 moved
+# 0xAA to 30 while this one held. One observation of "both are 100" could never
+# have separated them — the two hypotheses predicted the same recording.
+SNAPSHOT_BATTERY_HEALTH = 0xA9
+# Screen brightness, 0-100, matching the app's slider.
+SNAPSHOT_SCREEN_BRIGHTNESS = 0xAA
 
 DIRECTION = {1: "out", 2: "in"}
 
