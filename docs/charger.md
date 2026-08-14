@@ -24,9 +24,41 @@ handshake, only the ID changed — showed the current account's ID preserved the
 selected lock-screen image while an older captured ID made it stop displaying.
 The charger ties personalized screen state to that identity.
 
-**Never ship a captured ID as a constant.** It is an account identifier, a
-40-character lowercase hex string, recovered from the plain `uid` HTTP header
-while the Anker app loads its screensaver endpoints. Supply it at runtime.
+**Never ship a captured ID as a constant.** Supply it at runtime, and use the
+account that actually owns the charger — see below.
+
+### Getting the account ID
+
+It is a 40-character lowercase hex string, and it is **not** the charger serial,
+the BLE address, a phone identifier, or an auth token. Nothing on the device or
+in the BLE traffic contains it — it belongs to the Anker account.
+
+The way it was obtained here, which needed no decryption at all:
+
+1. Install **ProxyPin** on the phone (an on-device HTTPS capture app; iOS and
+   Android both work) and trust its certificate.
+2. Open the Anker app and go to the charger's **screensaver / display settings**,
+   so it fetches the screensaver endpoints.
+3. Export the session as HAR.
+4. Find any request to Anker's API and read the plain **`uid` request header**.
+   That is the ID.
+
+The request *bodies* are encrypted; they were never needed. The ID travels in
+clear in a header.
+
+**It is not only authentication.** A controlled A/B test — same charger, same
+handshake, same polling, only the ID changed — found that the account's own ID
+preserved the selected lock-screen image, while an older ID captured from a
+different session made the image stop displaying. The charger ties personalized
+screen state to this identity, so borrowing someone else's ID does not just fail
+to authenticate: it changes what the device shows.
+
+Store it somewhere real. On this machine the macOS app keeps it in the Keychain
+under `anker-user-id`, and this tooling reads `$ANKER_USER_ID` at runtime. It is
+deliberately absent from this repository, including from the captures — see
+`captures/README.md`.
+
+### Other differences
 
 **Different scales.** The charger reports millivolts, milliamps and centiwatts.
 The power bank uses tenths for all three. Same struct shape, different divisors —

@@ -42,6 +42,17 @@ osascript -e 'tell application "Terminal" to do script
 
 Worth knowing before spending an hour on a "hang".
 
+## A thing that is not in the protocol at all
+
+The charger will not stream without an Anker **account** ID, and no amount of
+staring at BLE traffic produces one — it is not on the device. It came from a
+phone-side HTTPS capture of the Anker app, out of a plain request header, with
+the encrypted bodies untouched. `docs/charger.md` has the recipe.
+
+Worth internalizing as a category: when a device withholds data pending some
+value you cannot find in its own traffic, the value probably lives in the vendor's
+app or cloud, and the cheapest path is usually a header rather than a payload.
+
 ## The method
 
 **Differential capture.** Make exactly one thing change in the physical world,
