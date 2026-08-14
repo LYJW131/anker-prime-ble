@@ -216,6 +216,24 @@ driving both C ports at once: C1 at 14.9 V x 1.9 A = 28.6 W and C2 at
 19.9 V x 4.4 A = 89.1 W, with `0xA6` reading exactly 117.7 W. That capture also
 shows the bank negotiating a different PD voltage per port.
 
+### Power can arrive on more than one path at once
+
+`0xA5` is a true sum across every input path, the same way `0xA6` sums the
+outputs. Two combinations have been measured:
+
+    dock 35.0 W + C1 32.9 W = 67.9 W total input
+    C1  37.3 W + C2 27.9 W = 65.2 W total input
+
+Both USB-C ports report `mode 2` exactly as a single charging port does, so
+nothing special marks the multi-source case — it is only visible by counting the
+paths that are drawing.
+
+The product spec says "USB-C input 100 W", singular, and every capture in this
+repository has a single supply. Both facts made dual input look unsupported, and
+neither could have shown otherwise: a recording with one supply cannot
+distinguish "sums the paths" from "mirrors the only path". The same shape of
+mistake as the account ID, two sections up.
+
 ### How the electrical scaling was confirmed
 
 Not by assumption — by watching it move. Early in a charge the input read
