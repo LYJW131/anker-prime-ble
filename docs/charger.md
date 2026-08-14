@@ -9,6 +9,8 @@ one place is what made the shared layer obvious.
 |---|---|
 | advertised name | `ASHDJW…` (stable prefix, unlike the power bank) |
 | service | `0000ff09`, same as the whole Prime line |
+| serial | `ASHDJW7CF49200487` |
+| MAC | `7C:E9:13:77:C3:64` |
 | firmware observed | `v0.0.5.1` |
 
 ## What differs from the power bank
@@ -82,8 +84,8 @@ not to report attached-device identity at all.
 
 ## Snapshot frames
 
-`0x0200` (and `0x0A00`, `0x0040`, `0x0405`) carry identifiers and settings rather
-than live port data:
+`0x0200` (and `0x0A00`, `0x0040`, `0x0405`) carry identifiers and settings
+alongside the port data described in the next section:
 
 | TLV | meaning |
 |---|---|
@@ -95,15 +97,27 @@ than live port data:
 
 Anything unrecognized is kept as raw hex under `field_0xNN` rather than dropped.
 
+## The snapshot carries live port data
+
+The service this decoder came from deliberately skipped port structs in
+`0x0200`, treating it as settings only. A capture taken with no account ID
+disagreed — and that case matters, because without an ID the snapshot is the
+*only* frame the charger sends.
+
+`0xA5` decoded to 20.08 V x 4.444 A = 89.2 W against a reported 89.15 W, while
+`0xB4` named an Apple laptop on that same port and `0xAC` reported an EPR-240W
+cable doing Apple PD fast charging. Three independent TLVs agreeing is enough to
+trust the struct, so `parse_snapshot` now runs the realtime decoder too.
+
+Whether the original exclusion was protecting against a different firmware, or a
+different command in `SNAPSHOT_COMMANDS`, is unknown. Only `0x0200` has been
+observed here; `0x0A00`, `0x0040` and `0x0405` have not.
+
 ## Status
 
-This decoder was written against a working device and has been in use, but it
-has not been re-verified against hardware since being reshaped into this
-repository's interface — the charger was tied up by another application
-throughout the power bank work. The refactor was checked against synthetic
-payloads built to the documented struct shape, which exercises the decoding path
-but not the assumption that the device still sends what it used to.
+Verified against hardware: handshake, identity, and the `0x0200` snapshot with
+one port under load all decode correctly — see `captures/charger-01.jsonl`.
 
-There are no charger captures in `captures/` for the same reason. Recording one
-is the obvious next step, and would let the charger decoder join the same replay
-regression the power bank enjoys.
+Not yet verified: the realtime `0x020A`/`0x0300` frames, which need an Anker
+account ID this repository deliberately does not store. Supply one via
+`--user-id` and record a session to close that gap.

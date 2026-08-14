@@ -1,6 +1,6 @@
 # Captures
 
-Recorded BLE sessions with the A110G power bank. Each line of a `.jsonl` is one
+Recorded BLE sessions with both devices. Each line of a `.jsonl` is one
 frame: direction, command, the raw frame, and the decrypted payload.
 
 These are both the evidence behind [docs/powerbank.md](../docs/powerbank.md) and
@@ -13,6 +13,8 @@ for f in captures/*.jsonl; do
   .venv/bin/python -m anker_prime_ble replay "$f" --decode | grep -E '^  (battery|in )'
 done
 ```
+
+### Power bank
 
 | file | state | why it exists |
 |---|---|---|
@@ -31,6 +33,15 @@ done
 Captures 01–08 are firmware v0.0.5.1; 09 onward are v0.0.5.2. The upgrade
 changed no realtime field — see the firmware section of the field map.
 
-They contain the device's serial number and MAC address. That is deliberate:
+### Charger
+
+| file | state | why it exists |
+|---|---|---|
+| `charger-01` | C1 charging a MacBook Pro at 89.2 W | verifies the A2687 decoder against hardware; also showed the `0x0200` snapshot carries live port structs |
+
+Recorded without an Anker account ID, so it contains the handshake and one
+snapshot but no realtime stream. Replay it with `--device charger`.
+
+They contain each device's serial number and MAC address. That is deliberate:
 without them the captures cannot be tied back to the hardware they describe, and
 this repository is private.

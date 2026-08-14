@@ -121,7 +121,9 @@ async def _run(args: argparse.Namespace, mode: str) -> None:
             profile.parse_realtime(payload, state)
 
         if mode == "status":
-            if command in profile.realtime_commands:
+            # Render on snapshots too: a charger with no account ID never sends
+            # a realtime frame, and the snapshot is all it has to show.
+            if command in profile.realtime_commands | profile.snapshot_commands:
                 print("\n" + profile.format_state(state), flush=True)
                 if args.unknown and state.unknown:
                     for key, value in sorted(state.unknown.items()):
@@ -199,6 +201,7 @@ def cmd_replay(args: argparse.Namespace) -> None:
                     profile.parse_identity(payload, state)
                 elif command in profile.snapshot_commands:
                     profile.parse_snapshot(payload, state)
+                    print(f"[{stamp}]\n{profile.format_state(state)}")
                 elif command in profile.realtime_commands:
                     profile.parse_realtime(payload, state)
                     print(f"[{stamp}]\n{profile.format_state(state)}")

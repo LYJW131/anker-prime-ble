@@ -252,6 +252,15 @@ def parse_snapshot(payload: bytes, state: ChargerState) -> ChargerState:
         elif tlv_type == 0xFD and decoded.text:
             state.firmware_tag = decoded.text
     state.raw_status = snapshot
+
+    # The snapshot also carries live per-port structs on this firmware, which
+    # matters because without an account ID it is the only frame the charger
+    # sends. The service this decoder came from deliberately skipped ports here;
+    # a capture disagreed. 0xA5 decoded to 20.08 V x 4.444 A = 89.2 W against a
+    # reported 89.15 W, while 0xB4 named an Apple laptop on that same port and
+    # 0xAC reported an EPR-240W cable doing Apple PD fast charging. Three
+    # independent TLVs agreeing is enough to trust the struct.
+    parse_realtime(payload, state)
     return state
 
 
