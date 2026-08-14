@@ -245,13 +245,16 @@ class Session:
         if self.stage == "ecdh":
             return
 
-        for command, tlv, _ in ff09.post_session_steps(self.user_id):
+        # 0x0027 carries the account ID. Both devices need it — the charger to
+        # start streaming at all, the power bank to keep the session past 26 s.
+        account_id = self.user_id if self.profile.needs_account_id else None
+        for command, tlv, _ in ff09.post_session_steps(account_id):
             await self.send(ff09.GROUP_SESSION, command, tlv)
             await asyncio.sleep(0.12)
 
         await self.send(ff09.GROUP_TELEMETRY, ff09.CMD_STATUS, ff09.status_probe_tlv())
         await asyncio.sleep(0.2)
-        if self.profile.needs_user_id:
+        if self.profile.needs_realtime_probe:
             if self.user_id:
                 await self.send(
                     ff09.GROUP_TELEMETRY, ff09.CMD_REALTIME,

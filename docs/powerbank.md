@@ -4,8 +4,12 @@ Field map for the power bank's telemetry, with the evidence behind each entry.
 For how it was worked out — and the five hypotheses that were wrong along the
 way — see [NOTES.md](../NOTES.md).
 
-Everything below is pushed at 1 Hz once a session is open — no polling, and no
-Anker account ID required.
+Everything below is pushed at 1 Hz once a session is open, with no polling.
+
+**An Anker account ID is required**, though not to start the stream. The bank
+begins streaming from the plain handshake and then drops the link after 26
+seconds; sending it on `0x0027` is what makes the session persist. See
+[The 26-second session](#the-26-second-session).
 
 Target device on which it was observed:
 
@@ -98,6 +102,27 @@ apply. The bank's layout is below.
 
 `0x0300` is a subset of `0x0200`: the realtime block appears in the snapshot
 shifted by `+0x0D` (`0x0300 0xA5` is `0x0200 0xB2`, and so on).
+
+## The 26-second session
+
+Without `0x0027` carrying the account ID, the bank streams for **26 seconds** and
+then drops the BLE link. With it, the session runs indefinitely — a 99-second
+test ran to completion with 100 frames and no drop.
+
+    no 0x0027:   27 frames over 26.1 s, then disconnect
+    with 0x0027: 100 frames over 99.0 s, still connected
+
+The timing is identical every time: eleven separate captures here all ran 26 s
+give or take a frame, whether the bank was charging, discharging, driving two
+ports or thermally limited. It behaves like an unauthenticated grace period.
+
+This was missed for a long time because **every capture taken here was shorter
+than 26 seconds**, so both "no account ID needed" and "account ID needed" predict
+exactly the same recording. That is the failure mode this repository's own notes
+warn about, walked into anyway.
+
+`0x020A` remains charger-only: the bank has never been sent one and streams
+without it.
 
 ## Telemetry frames are not encrypted
 

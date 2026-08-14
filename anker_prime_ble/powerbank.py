@@ -293,7 +293,8 @@ PROFILE = DeviceProfile(
     # The bank advertises its bare serial with no stable prefix, so scanning
     # falls back to the ff09 service UUID.
     name_prefix=None,
-    needs_user_id=False,
+    needs_account_id=True,
+    needs_realtime_probe=False,
     new_state=PowerBankState,
     parse_realtime=parse_realtime,
     parse_snapshot=parse_snapshot,

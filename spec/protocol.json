@@ -20,6 +20,7 @@
       "name": "Anker Prime 160W charger \u2014 A2687",
       "name_prefix": "ASHDJW",
       "needs_account_id": true,
+      "needs_realtime_probe": true,
       "realtime_commands": [
         518,
         519,
@@ -128,7 +129,8 @@
     "powerbank": {
       "name": "Anker Prime Power Bank (20K, 220W) \u2014 A110G",
       "name_prefix": null,
-      "needs_account_id": false,
+      "needs_account_id": true,
+      "needs_realtime_probe": false,
       "realtime_commands": [
         768
       ],

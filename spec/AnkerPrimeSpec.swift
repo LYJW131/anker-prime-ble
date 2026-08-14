@@ -32,6 +32,7 @@ public enum AnkerPrimeSpec {
     public enum Charger {
         public static let namePrefix = "ASHDJW"
         public static let needsAccountID = true
+        public static let needsRealtimeProbe = true
         public static let ports = ["C1", "C2", "C3"]
         public static let realtimeCommands: Set<UInt16> = [0x0206, 0x0207, 0x020A, 0x0300, 0x0303, 0x0410, 0x4300]
         public static let snapshotCommands: Set<UInt16> = [0x0040, 0x0200, 0x0405, 0x0A00]
@@ -116,7 +117,8 @@ public enum AnkerPrimeSpec {
     }
 
     public enum PowerBank {
-        public static let needsAccountID = false
+        public static let needsAccountID = true
+        public static let needsRealtimeProbe = false
         public static let ports = ["C1", "C2", "A"]
         public static let realtimeCommands: Set<UInt16> = [0x0300]
         public static let snapshotCommands: Set<UInt16> = [0x0200]

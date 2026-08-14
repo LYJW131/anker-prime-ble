@@ -63,7 +63,8 @@ def build_spec() -> dict:
             "charger": {
                 "name": charger.PROFILE.name,
                 "name_prefix": charger.PROFILE.name_prefix,
-                "needs_account_id": charger.PROFILE.needs_user_id,
+                "needs_account_id": charger.PROFILE.needs_account_id,
+                "needs_realtime_probe": charger.PROFILE.needs_realtime_probe,
                 "realtime_commands": sorted(charger.REALTIME_COMMANDS),
                 "snapshot_commands": sorted(charger.SNAPSHOT_COMMANDS),
                 "ports": list(charger._PORT_ORDER),
@@ -89,7 +90,8 @@ def build_spec() -> dict:
             "powerbank": {
                 "name": powerbank.PROFILE.name,
                 "name_prefix": powerbank.PROFILE.name_prefix,
-                "needs_account_id": powerbank.PROFILE.needs_user_id,
+                "needs_account_id": powerbank.PROFILE.needs_account_id,
+                "needs_realtime_probe": powerbank.PROFILE.needs_realtime_probe,
                 "realtime_commands": sorted(powerbank.REALTIME_COMMANDS),
                 "snapshot_commands": sorted(powerbank.SNAPSHOT_COMMANDS),
                 "ports": ["C1", "C2", "A"],
@@ -248,6 +250,7 @@ public enum AnkerPrimeSpec {{
     public enum Charger {{
         public static let namePrefix = "{charger_spec["name_prefix"]}"
         public static let needsAccountID = {str(charger_spec["needs_account_id"]).lower()}
+        public static let needsRealtimeProbe = {str(charger_spec["needs_realtime_probe"]).lower()}
         public static let ports = [{", ".join(f'"{p}"' for p in charger_spec["ports"])}]
         public static let realtimeCommands: Set<UInt16> = [{", ".join(f"0x{c:04X}" for c in charger_spec["realtime_commands"])}]
         public static let snapshotCommands: Set<UInt16> = [{", ".join(f"0x{c:04X}" for c in charger_spec["snapshot_commands"])}]
@@ -282,6 +285,7 @@ public enum AnkerPrimeSpec {{
 
     public enum PowerBank {{
         public static let needsAccountID = {str(bank["needs_account_id"]).lower()}
+        public static let needsRealtimeProbe = {str(bank["needs_realtime_probe"]).lower()}
         public static let ports = [{", ".join(f'"{p}"' for p in bank["ports"])}]
         public static let realtimeCommands: Set<UInt16> = [{", ".join(f"0x{c:04X}" for c in bank["realtime_commands"])}]
         public static let snapshotCommands: Set<UInt16> = [{", ".join(f"0x{c:04X}" for c in bank["snapshot_commands"])}]

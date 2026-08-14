@@ -23,9 +23,11 @@ one session the bank was streaming `0x0300` frames at 1 Hz.
 
 Two differences showed up immediately:
 
-- **No account ID needed.** The charger will not start its stream unless
-  `0x0027` carries a 40-character Anker account ID. The bank starts after
-  `0x0022` alone. `0x0027` and `0x020A` were never sent to it in any capture.
+- **No account ID needed** — wrong, and it took a long time to find out. The
+  bank *starts* streaming after `0x0022` alone, then drops the link at 26
+  seconds. `0x0027` with the account ID is what makes the session persist. Every
+  capture taken here was shorter than 26 s, so the two possibilities predicted
+  identical recordings. See below.
 - **Different TLV layout.** None of the charger's port structs applied.
 
 ## The thing that nearly stopped it before it started
@@ -144,6 +146,27 @@ The same shape of reasoning settled `0xA6`. Whether it was a true sum or a mirro
 of the busiest port is indistinguishable in every single-port capture — and ten
 of the eleven were single-port. Driving both C ports at once resolved it in one
 frame: C1 at 28.6 W, C2 at 89.1 W, `0xA6` reading exactly 117.7 W.
+
+## The sixth wrong hypothesis, and the worst one
+
+**"The power bank does not need an account ID."** It starts streaming without
+one, so this looked settled — and it was stated in the docs, encoded in the
+profile, and used to justify not asking users for it.
+
+It is wrong. Without `0x0027` the bank drops the link after 26 seconds. With it,
+a 99-second session ran to completion.
+
+What makes this the worst of the six is that the evidence was *systematically*
+unable to show it: every capture here ran 20–45 seconds, and the ones that ran
+longer were cut short by the very disconnect being explained. Both hypotheses
+predicted every recording in the archive. The device owner suggested trying the
+account ID early on and was told the captures ruled it out — they did not rule
+it out, they just could not see the difference.
+
+The general form: **when a hypothesis is contradicted, check whether the evidence
+against it could even have shown the alternative.** Eleven captures agreeing
+means nothing if all eleven are the same shape. This repository's own notes say
+exactly that, two sections down, and it happened anyway.
 
 ## The one the fixtures could not catch
 

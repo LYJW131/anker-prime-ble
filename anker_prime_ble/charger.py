@@ -307,7 +307,8 @@ PROFILE = DeviceProfile(
     name_prefix=DEVICE_NAME_PREFIX,
     # Without an Anker account ID on 0x0027 this firmware never starts its
     # pushed stream, and 0x020A cannot be built at all.
-    needs_user_id=True,
+    needs_account_id=True,
+    needs_realtime_probe=True,
     new_state=ChargerState,
     parse_realtime=parse_realtime,
     parse_snapshot=parse_snapshot,

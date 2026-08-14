@@ -188,9 +188,16 @@ class DeviceProfile:
     # Advertised-name prefix, when the device has a stable one. Scanning falls
     # back to the ff09 service UUID, which the whole product line advertises.
     name_prefix: Optional[str]
-    # The charger will not start its stream without an Anker account ID; the
-    # power bank streams after the plain handshake.
-    needs_user_id: bool
+    # Whether 0x0027 must carry the Anker account ID.
+    #
+    # Both devices need it, for different reasons. The charger will not start
+    # its stream at all without one. The power bank *does* start — and then
+    # drops the link after 26 seconds. Every capture taken here was shorter than
+    # that, which is why it looked optional for so long.
+    needs_account_id: bool
+    # Whether to send the 0x020A realtime probe. The charger needs it; the power
+    # bank streams from 0x0022 alone and was never sent one in any capture.
+    needs_realtime_probe: bool
     new_state: Callable[[], Any]
     parse_realtime: Callable[[bytes, Any], Any]
     parse_snapshot: Callable[[bytes, Any], Any]
