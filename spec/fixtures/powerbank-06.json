@@ -24,7 +24,9 @@
     "temperature_1_c": null,
     "temperature_2_c": null,
     "pomodoro_seconds": null,
-    "pomodoro_enabled": null
+    "pomodoro_enabled": null,
+    "battery_health_percent": null,
+    "screen_brightness": null
    }
   },
   {
@@ -109,7 +111,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -194,7 +198,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -279,7 +285,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -364,7 +372,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -449,7 +459,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -534,7 +546,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -619,7 +633,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -704,7 +720,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -789,7 +807,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -874,7 +894,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -959,7 +981,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -1044,7 +1068,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -1129,7 +1155,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -1214,7 +1242,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -1299,7 +1329,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -1384,7 +1416,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -1469,7 +1503,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -1554,7 +1590,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -1639,7 +1677,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -1724,7 +1764,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -1809,7 +1851,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -1894,7 +1938,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -1979,7 +2025,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -2064,7 +2112,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -2149,7 +2199,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -2234,7 +2286,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -2319,7 +2373,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   },
   {
@@ -2404,7 +2460,9 @@
     "temperature_1_c": 47,
     "temperature_2_c": 48,
     "pomodoro_seconds": 1500,
-    "pomodoro_enabled": true
+    "pomodoro_enabled": true,
+    "battery_health_percent": 100,
+    "screen_brightness": 100
    }
   }
  ]

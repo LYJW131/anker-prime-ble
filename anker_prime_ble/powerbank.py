@@ -101,6 +101,9 @@ class PowerBankState(DeviceState):
 
     pomodoro_seconds: Optional[int] = None
     pomodoro_enabled: Optional[bool] = None
+    # Snapshot-only settings. They arrive once per connection, not every frame.
+    battery_health_percent: Optional[int] = None
+    screen_brightness: Optional[int] = None
 
     def to_dict(self) -> dict:
         data = super().to_dict()
@@ -120,6 +123,8 @@ class PowerBankState(DeviceState):
                 "temperature_2_c": self.temperature_2_c,
                 "pomodoro_seconds": self.pomodoro_seconds,
                 "pomodoro_enabled": self.pomodoro_enabled,
+                "battery_health_percent": self.battery_health_percent,
+                "screen_brightness": self.screen_brightness,
             }
         )
         return data
@@ -235,6 +240,16 @@ def parse_snapshot(payload: bytes, state: PowerBankState) -> PowerBankState:
                 state.pomodoro_enabled = bool(decoded.payload[0])
                 state.pomodoro_seconds = int.from_bytes(decoded.payload[1:3], "little")
             continue
+        elif tlv_type == SNAPSHOT_BATTERY_HEALTH:
+            decoded = ff09.read_typed_value(value)
+            if decoded.u is not None:
+                state.battery_health_percent = decoded.u
+            continue
+        elif tlv_type == SNAPSHOT_SCREEN_BRIGHTNESS:
+            decoded = ff09.read_typed_value(value)
+            if decoded.u is not None:
+                state.screen_brightness = decoded.u
+            continue
         elif tlv_type == SNAPSHOT_POMODORO_SECONDS:
             decoded = ff09.read_typed_value(value)
             if decoded.u is not None:
@@ -283,6 +298,8 @@ def format_state(state: PowerBankState) -> str:
     for port in dock + state.ports:
         lines.append(f"    {port.name}: {port.summary()}")
 
+    if state.battery_health_percent is not None:
+        lines.append(f"  health {state.battery_health_percent}%")
     if state.pomodoro_seconds:
         flag = "" if state.pomodoro_enabled is None else (
             " (on)" if state.pomodoro_enabled else " (off)"
