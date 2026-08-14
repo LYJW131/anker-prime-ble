@@ -39,6 +39,7 @@ changed no realtime field — see the firmware section of the field map.
 |---|---|---|
 | `charger-01` | C1 charging a MacBook Pro at 89.2 W, no account ID | verifies the A2687 decoder against hardware; also showed the `0x0200` snapshot carries live port structs |
 | `charger-02` | same load, with an account ID | 35 pushed `0x0300` frames at 1 Hz — the stream `0x0027` unlocks |
+| `charger-03` | the 20K power bank charging on C1, ~6 min | 353 frames with the re-arm watchdog running; the evidence that no charger field tracks temperature, and that `0xB4` follows a device swap |
 
 Replay both with `--device charger`. The difference between them is the whole
 argument for why the charger needs an account ID and the power bank does not.

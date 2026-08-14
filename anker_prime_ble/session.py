@@ -105,12 +105,14 @@ class Session:
         user_id: Optional[str] = None,
         stage: str = "full",
         record: Optional[str] = None,
+        idle_timeout: float = 8.0,
     ) -> None:
         self.device = device
         self.profile = profile
         self.on_frame = on_frame
         self.user_id = user_id
         self.stage = stage
+        self.idle_timeout = idle_timeout
         self._crypto = ff09.CryptoContext()
         self._assembler = ff09.FrameAssembler()
         self._pending: Optional[tuple[int, asyncio.Future[bytes]]] = None
@@ -119,6 +121,10 @@ class Session:
         self._notify_uuid = ff09.NOTIFY_CHAR_UUID
         self._log = open(record, "a", buffering=1) if record else None
         self.commands_seen: dict[int, int] = {}
+        # Monotonic stamp of the last decoded frame. The charger's pushed stream
+        # goes quiet on its own and has to be re-armed, so a long capture needs
+        # to notice silence rather than assume the device has nothing to say.
+        self._last_frame_at = 0.0
 
     # -- plumbing --
 
@@ -185,6 +191,7 @@ class Session:
             "rx", frame.command, enc=frame.encrypted, ack=frame.ack, ok=True,
             plain=payload.hex().upper(), raw=raw.hex().upper(),
         )
+        self._last_frame_at = time.monotonic()
         self.on_frame(frame.command, payload)
         if self._pending is not None:
             expected, future = self._pending
@@ -252,19 +259,50 @@ class Session:
             await self.send(ff09.GROUP_SESSION, command, tlv)
             await asyncio.sleep(0.12)
 
+        await self.arm_telemetry()
+
+    async def arm_telemetry(self) -> None:
+        """Ask for a snapshot and a realtime frame.
+
+        Sent once at the end of the handshake, and again whenever the watchdog
+        finds the stream quiet. Both are reads; neither changes a setting.
+        """
         await self.send(ff09.GROUP_TELEMETRY, ff09.CMD_STATUS, ff09.status_probe_tlv())
         await asyncio.sleep(0.2)
-        if self.profile.needs_realtime_probe:
-            if self.user_id:
-                await self.send(
-                    ff09.GROUP_TELEMETRY, ff09.CMD_REALTIME,
-                    ff09.realtime_probe_tlv(self.user_id),
-                )
-            else:
-                log.warning(
-                    "%s needs an account ID for its stream — pass --user-id or set "
-                    "ANKER_USER_ID, or it will stay quiet", self.profile.name,
-                )
+        if not self.profile.needs_realtime_probe:
+            return
+        if self.user_id:
+            await self.send(
+                ff09.GROUP_TELEMETRY, ff09.CMD_REALTIME,
+                ff09.realtime_probe_tlv(self.user_id),
+            )
+        else:
+            log.warning(
+                "%s needs an account ID for its stream — pass --user-id or set "
+                "ANKER_USER_ID, or it will stay quiet", self.profile.name,
+            )
+
+    async def _watchdog(self, idle_timeout: float) -> None:
+        """Re-arm the stream when it goes silent.
+
+        The charger stops pushing on its own after a dozen frames or so. A
+        capture that only listens then sits there recording nothing, which reads
+        as "the device has no more to say" rather than "nobody asked again" —
+        and quietly ruins any experiment that needs minutes of data, such as
+        watching a temperature change. The power bank does not need this, but
+        re-arming an already-live stream is harmless.
+        """
+        while True:
+            await asyncio.sleep(1.0)
+            if time.monotonic() - self._last_frame_at < idle_timeout:
+                continue
+            log.info("stream quiet for %.0fs; re-arming", idle_timeout)
+            try:
+                await self.arm_telemetry()
+            except Exception as exc:
+                log.warning("re-arm failed: %s", exc)
+                return
+            self._last_frame_at = time.monotonic()
 
     async def run(self, seconds: float) -> None:
         async with BleakClient(self.device, timeout=25.0) as client:
@@ -275,9 +313,15 @@ class Session:
             await asyncio.sleep(0.3)
             await self.handshake()
             log.info("handshake stage '%s' done; listening %.0fs", self.stage, seconds)
-            deadline = time.monotonic() + seconds
-            while client.is_connected and time.monotonic() < deadline:
-                await asyncio.sleep(0.5)
+            self._last_frame_at = time.monotonic()
+            watchdog = asyncio.create_task(self._watchdog(self.idle_timeout))
+            try:
+                deadline = time.monotonic() + seconds
+                while client.is_connected and time.monotonic() < deadline:
+                    await asyncio.sleep(0.5)
+            finally:
+                watchdog.cancel()
+                await asyncio.gather(watchdog, return_exceptions=True)
         if self._log:
             self._log.close()
 

@@ -67,6 +67,9 @@ deliberately absent from this repository, including from the captures — see
 
 ### Other differences
 
+**No temperature.** The power bank reports two, the charger reports none — see
+below.
+
 **Different scales.** The charger reports millivolts, milliamps and centiwatts.
 The power bank uses tenths for all three. Same struct shape, different divisors —
 one of the easier ways to produce a confidently wrong reading.
@@ -106,8 +109,14 @@ protocol byte:
 
 `0xB4` is **inferred from captured traffic**, not from any recovered app table.
 On the capture that established it, C2 held an Apple device and decoded to VID
-`0x05AC` while an empty C1 read the `0xFFFA`/`0xFFFB` sentinel. Treat as
-provisional until more devices are sampled.
+`0x05AC` while an empty C1 read the `0xFFFA`/`0xFFFB` sentinel.
+
+It has since survived a device swap, which is the first real test it has had:
+between `charger-02` and `charger-03` the C1 slot went from `AC05 1973` to
+`1A29 0B11` — Apple/MacBook Pro to Anker VID `0x291A`, PID `0x110B`, which is
+the 20K Prime power bank. The cable descriptor moved from `0201` to `0200` in
+the same frame, dropping the Apple fast-charge flag. Two independent fields
+agreeing on a swap neither was told about.
 
 `DEVICE_MODEL_NAMES` in `charger.py` only contains (VID, PID) pairs that have
 actually been observed on real hardware alongside what the official app printed.
@@ -120,6 +129,46 @@ numerically but not named.
 **Worth contrasting with the power bank**, whose equivalent identity slot stayed
 all-`0xFF` even with a 90 W laptop attached and drawing. That firmware appears
 not to report attached-device identity at all.
+
+## There is no temperature reading
+
+Worth stating plainly, because the charger looks like it should have one and the
+power bank does: **the A2687 does not report a numeric temperature.**
+
+The upstream reverse-engineering notes settle it — no temperature field in the
+official `A2687DeviceInfo` model, none in the port-history model, and no
+temperature value parsed anywhere in the app's A2687 implementation. The
+Web BLE page has a `temperature: null` slot in its status object that is never
+assigned; it appears exactly twice in that file, once as the initializer and
+once inside a log string. A UI field that is always blank is easy to remember as
+a field that exists.
+
+Six minutes of capture agrees: across 353 frames at a steady load, and against a
+second capture taken a day earlier at a different load, not one byte outside the
+port telemetry moved. `0xAB` looked promising — it decodes to `[…, 55, 105, 0,
+59, 59]`, and 55/59 °C is exactly what a charger under 89 W should read — but it
+is byte-identical across both captures. Plausible numbers are not evidence.
+
+What the charger has instead is a **qualitative** over-temperature state. The
+app surfaces it as an error condition, roughly "abnormal device temperature
+detected, over-temperature protection will engage", rather than a value.
+
+### The 0x03xx push commands
+
+From the upstream notes. Only `0x0300` has been observed here, which is expected
+— the rest are event-driven:
+
+| command | content |
+|---|---|
+| `0x0300` | device info / charge status — the 1 Hz stream |
+| `0x0301` | **device error code** — where the over-temperature state lives |
+| `0x0302` | screen brightness or port status |
+| `0x0303` | charge mode / current report |
+| `0x0304` | screen-off time / error report |
+| `0x0305` | clock screensaver / LED brightness |
+
+To catch the thermal state you would have to make the charger actually overheat,
+then watch for `0x0301`. Nothing here has provoked one.
 
 ## Snapshot frames
 
