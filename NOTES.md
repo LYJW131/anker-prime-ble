@@ -145,6 +145,24 @@ of the busiest port is indistinguishable in every single-port capture — and te
 of the eleven were single-port. Driving both C ports at once resolved it in one
 frame: C1 at 28.6 W, C2 at 89.1 W, `0xA6` reading exactly 117.7 W.
 
+## The one the fixtures could not catch
+
+The power bank sends its telemetry **unencrypted**, while the charger encrypts
+its own. A second implementation, written charger-first, guarded its receive path
+with `if frame.encrypted` and dropped every power bank frame. The connection
+handshook cleanly (handshake frames *are* encrypted), reported itself connected,
+and delivered nothing — then dropped every 14 seconds when the stall watchdog
+concluded the stream was dead.
+
+The conformance fixtures did not catch it, and could not have: they replay
+decoded payloads and never touch the frame layer. That is a real limit of this
+kind of contract worth knowing — it pins down *interpretation*, not *plumbing*.
+
+What found it was recording the raw frames on the failing side and diffing them
+against a known-good capture. Reading the code did not; the two handshakes were
+byte-for-byte identical, and every plausible culprit checked out. Two hours of
+staring lost to what one capture answered in a minute.
+
 ## Two encodings, and why that matters
 
 The bank mixes them:

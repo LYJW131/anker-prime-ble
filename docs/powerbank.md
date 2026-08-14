@@ -99,6 +99,26 @@ apply. The bank's layout is below.
 `0x0300` is a subset of `0x0200`: the realtime block appears in the snapshot
 shifted by `+0x0D` (`0x0300 0xA5` is `0x0200 0xB2`, and so on).
 
+## Telemetry frames are not encrypted
+
+The handshake is encrypted — fixed key, then the ECDH session key, exactly like
+the charger. **The telemetry that follows is not.** A `0x0300` frame carries its
+TLVs in clear right after the header, with the encrypted flag clear in the
+command byte:
+
+    FF09 7300 03 01 11 03 00 | A1 01 31 A2 03 04 3B 55 …
+                        └flags=0x03, bit 0x40 not set
+                                     └TLVs, no ciphertext
+
+The charger encrypts its telemetry, so an implementation written for it first
+tends to grow a `if frame.encrypted` guard and silently drop every power bank
+frame. That produces a connection that handshakes fine and then never delivers
+anything — which is exactly what happened to the macOS reporter. Branch on the
+frame's own flag, never on which device you think you are talking to.
+
+Note that fixtures cannot catch this: they replay decoded payloads and bypass
+the frame layer entirely. It needs a test at the raw-frame level.
+
 ## `0x0300` field map
 
 Two encodings are in play, and mixing them up is the main trap here:
