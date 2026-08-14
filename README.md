@@ -87,19 +87,18 @@ a command sits waiting.
 - **[docs/powerbank.md](docs/powerbank.md)** — A110G field map with the evidence
   for each field.
 - **[docs/charger.md](docs/charger.md)** — A2687 field map.
-- **[captures/](captures/)** — 12 recorded sessions: eleven power bank ones
+- **[captures/](captures/)** — 13 recorded sessions: eleven power bank ones
   covering charge, discharge, pass-through, dual output, thermal throttling and a
-  firmware upgrade, plus one charger session. These
+  firmware upgrade, plus two charger sessions with and without an account ID.
+  These
   are the evidence behind the field maps and double as regression fixtures:
   change a decoder, replay all of them, see whether they still make sense.
 
 ## Status
 
-The power bank's telemetry is decoded and confirmed against hardware. The
-charger's handshake, identity and snapshot decoding are confirmed too; its
-realtime stream is not, because that needs an Anker account ID this repository
-deliberately does not store.
+Both devices are decoded and confirmed against hardware, including the charger's
+pushed realtime stream.
 
-What remains: a handful of the power bank's `0x0200` settings bytes, the 150 W
-A1903 charging base (which unlike the 100 W A1902 allows output while docked),
-and a charger capture taken with an account ID.
+What remains: a handful of the power bank's `0x0200` settings bytes, and the
+150 W A1903 charging base, which unlike the 100 W A1902 allows output while
+docked.

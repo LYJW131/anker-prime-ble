@@ -115,9 +115,10 @@ observed here; `0x0A00`, `0x0040` and `0x0405` have not.
 
 ## Status
 
-Verified against hardware: handshake, identity, and the `0x0200` snapshot with
-one port under load all decode correctly — see `captures/charger-01.jsonl`.
+Verified against hardware end to end: handshake, identity, the `0x0200` snapshot,
+and — with an account ID supplied — the `0x020A` reply and the pushed `0x0300`
+stream at 1 Hz. See `captures/charger-01.jsonl` (no ID, snapshot only) and
+`captures/charger-02.jsonl` (with ID, 35 stream frames).
 
-Not yet verified: the realtime `0x020A`/`0x0300` frames, which need an Anker
-account ID this repository deliberately does not store. Supply one via
-`--user-id` and record a session to close that gap.
+`0x0027` is what unlocks the stream: the same session without it produced no
+`0x0300` frame at all.

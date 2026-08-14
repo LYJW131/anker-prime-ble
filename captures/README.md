@@ -37,10 +37,15 @@ changed no realtime field — see the firmware section of the field map.
 
 | file | state | why it exists |
 |---|---|---|
-| `charger-01` | C1 charging a MacBook Pro at 89.2 W | verifies the A2687 decoder against hardware; also showed the `0x0200` snapshot carries live port structs |
+| `charger-01` | C1 charging a MacBook Pro at 89.2 W, no account ID | verifies the A2687 decoder against hardware; also showed the `0x0200` snapshot carries live port structs |
+| `charger-02` | same load, with an account ID | 35 pushed `0x0300` frames at 1 Hz — the stream `0x0027` unlocks |
 
-Recorded without an Anker account ID, so it contains the handshake and one
-snapshot but no realtime stream. Replay it with `--device charger`.
+Replay both with `--device charger`. The difference between them is the whole
+argument for why the charger needs an account ID and the power bank does not.
+
+Neither contains the account ID. It travels only inside AES-GCM ciphertext under
+an ephemeral ECDH session key, and no response echoes it back — checked before
+these were committed.
 
 They contain each device's serial number and MAC address. That is deliberate:
 without them the captures cannot be tied back to the hardware they describe, and
