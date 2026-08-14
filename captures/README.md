@@ -47,6 +47,12 @@ Neither contains the account ID. It travels only inside AES-GCM ciphertext under
 an ephemeral ECDH session key, and no response echoes it back — checked before
 these were committed.
 
-They contain each device's serial number and MAC address. That is deliberate:
-without them the captures cannot be tied back to the hardware they describe, and
-this repository is private.
+They contain each device's serial number and BLE MAC address, deliberately: a
+capture that cannot be tied to the hardware it came from is worth much less as
+evidence, and every field claim in `docs/` rests on these being real recordings
+of a specific unit. Neither value is a credential — a BLE MAC is broadcast to
+anything in radio range, and the serial is printed on the device.
+
+They do **not** contain the Anker account ID the charger needs. That travels
+only inside AES-GCM ciphertext under an ephemeral ECDH session key, and no
+response echoes it back; both charger captures were checked before committing.
