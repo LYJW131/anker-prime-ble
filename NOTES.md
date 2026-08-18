@@ -227,3 +227,112 @@ Adding a third device: write a `DeviceProfile` plus a decoder module, matching
 the shape of `powerbank.py`. The transport, session, CLI, and generic annotator
 should not need edits — if they do, that is worth a second look, because these
 two devices agreed on all of it.
+
+## The charger's custom cover
+
+The A2687 can show one of eight custom pictures. The title and the JPEG live in
+Anker's cloud. The charger only stores the pixels and reports the current cloud
+id in snapshot TLV `0xE1`. Switching the current picture is a single BLE write,
+command `0x021F`, group `0x0F`. `docs/screensaver.md` is the recipe;
+this section is what it cost to get there.
+
+### Tools that actually moved the work
+
+- **This repo's session**, from Terminal.app or Ghostty with a Bluetooth TCC
+  grant. CoreBluetooth still SIGABRTs any host without
+  `NSBluetoothAlwaysUsageDescription`.
+- **ProxyPin HARs** of the official iOS app against
+  `aiot-api-cn.anker.com.cn`. The CN host accepts the same plaintext JSON as
+  [anker-solix-api](https://github.com/thomluther/anker-solix-api) if you omit
+  `x-encryption-info`. The official app wraps bodies in `algo_ecdh`; that
+  wrapping is not required.
+- **PacketLogger** from Additional Tools for Xcode, **New iOS Trace**, phone on
+  USB, Developer Mode, and Apple's Bluetooth logging profile installed on the
+  phone. macOS Trace sees zero iPhone HCI. Live traces cannot Save/Export;
+  stop the trace first. A new PacketLogger window is fine; a new *BLE session*
+  is not — see below.
+- **Peekaboo** to drive PacketLogger and System Settings when the Bluetooth
+  profile and Accessibility grants are in place.
+- **Anker 3.22.2** (`com.anker.charging`) from APKPure as an XAPK. The Flutter
+  AOT is `libapp.so`. This split was only `armeabi-v7a`. Strings named
+  `setMiniChargeScreensaverReq`, `action_set_screen_saver_params`,
+  `screensaverId`, `hash_code`, `screenSaverType`. Flutter does not build the
+  BLE TLV; that happens in the VMP-protected `ak_iot_kit` native layer.
+  [Hyper-Beast's 3.18.0 notes](https://github.com/Hyper-Beast/Anker_Prime_160W_WebBLE)
+  already flagged `0x021F` as the multi-parameter screensaver write and left
+  the body unpublished.
+
+### Wrong turns
+
+**The slot is not on the wire.** Analytics event
+`AN_App_Custom_Picture_Change` carries the 1-based `seq`. `0xE1` does not.
+Bytes 2–3 are the cloud `id` as u16le. Bytes 0–1 are a flag word, usually
+`00 03` or `80 03` — not a constant `0x0380`. Names such as `FSF` never
+appear on BLE.
+
+**`0x021F` ACKs garbage.** Every guessed 47-byte layout came back
+`00 A1 01 31`, including an empty GET. The ACK means the command exists, not
+that the body applied. Only a change in `0xE1` counts. Nearby opcodes
+`0x021D` / `0x0220` / `0x0221` reject with `04 A1 01 31`.
+
+**Auth was not the gate.** Official `GCMUserAuthCmd` documents `0x0027`
+`A3 = password`. This firmware applies `0x0204` brightness (TLV `0xA9`,
+0–100) with only `A2` = account id. Empty, user-id, serial and hash values in
+`A3` did not change that. `session.auth_password` exists for the day a unit
+needs it.
+
+**Guessing the 47-byte TLV from XOR offsets was not enough.** Two official
+writes in one session differ at plaintext offsets 10–11 (`id` u16le), 17–20
+(`hash_code` u32le) and 43 (unix epoch). Consecutive slots (2 and 3) make
+offset 10 look like either the id low byte *or* a 0-based seq (`0x01 ^ 0x02
+= 0x03`). A same-session jump `1→2→4→1→3` kills the seq reading: 2^4 is
+`0x06`/`0x02`, the observed byte is `0x04`, and no extra byte moves. Putting
+id at A2`[2:4]` and seq at A2`[5]` — the first layout that matched those
+offsets — writes the seq into the real id slot. Firmware ACKs and ignores it.
+
+**`FE 04 <epoch>` is the wrong timestamp wrapper.** Brightness uses that.
+`0x021F` uses `FE 05 03 <epoch>` (typed u32). A 36-byte A2 blob with the id
+and hash in the XOR slots also fails, because the official body has no A2:
+it is `A1` / `A3=type 3` / `A4=id` / `A5=hash` / `FD="SmallChargingUrl"` /
+typed `FE`.
+
+**The session key is not on HCI.** Official GCM is ECDH P-256; the private
+half never leaves the phone. Ciphertext XOR equals plaintext XOR only while
+the app stays connected and PacketLogger keeps one iOS Trace. A new window
+on a *new* connection cannot be XORed against an earlier one. The first
+nine ciphertext bytes of `0x021F` are the cheap check: they stay put inside
+one session (`1929B44C…` vs `719DD669…` were different sessions).
+
+**Nonce reuse is the decrypt.** This firmware feeds the same GCM nonce to
+every post-handshake frame. `0x0300` starts `A1 01 31 A2 03 02 46 06 …`.
+XOR that known prefix against a `0x0300` captured in the same window as the
+select writes, then XOR the keystream onto each `0x021F`. Idle C1
+(`A5 08 04 00` plus zeros) is the template that made id and hash match on
+all four jumps; a live charging C1 template missed the last hash byte.
+Do not commit PacketLogger traces that still contain a live session.
+
+**Cloud login looks encrypted until it is not.** Cold-start HARs do not show
+a helpful `ENCRYPT_APP_PUBLICKEY` header. Key exchange is
+`openapi/oauth/key/exchange` with `client_public_key` in the JSON. SMS send
+is a bare `{phone_number, phone_code: "86", kind: "login"}`. SMS login
+without the Solix-style ECDH envelope (`client_secret_info.public_key` plus
+the static server point in `docs/screensaver.md`) returns `code: 10000` /
+`请求失败` and no hint. One new token can kick the phone app, after which
+the charger stops advertising until that app is quit.
+
+**The APK names the fields and then stops.** `libapp.so` strings are the
+Flutter parameter map. The native kit is iJiami VMP; JADX of `classes.dex`
+is a stub. APKPure's 3.22.2 XAPK advertised only `armeabi-v7a`, so
+arm64-only dumpers such as blutter never ran. Image transfer is a separate
+path (`action_start_transfer_screen_saver_image` and friends). Select of a
+picture that is already on the charger is the one 47-byte write; a picture
+that exists only in the cloud will ACK and stay put until the official app
+has pushed the pixels.
+
+### What is now confirmed
+
+`charger.screensaver_select_tlv(id, hash_code)` is the official body.
+Live writes moved `0xE1` 45314 → 24551, 24551 → 45317, 45313 → 45410, and
+45410 → 24551. Listing is still HTTP
+`/mini_power/v1/app/style/get_manual_clock_screensavers`. There is no HTTP
+"make this the current picture".

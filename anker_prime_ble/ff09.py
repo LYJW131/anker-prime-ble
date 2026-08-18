@@ -336,6 +336,7 @@ def handshake_steps() -> list[tuple[int, list[tuple[int, bytes]], bool]]:
 
 def post_session_steps(
     user_id: Optional[str] = None,
+    password: Optional[bytes] = None,
 ) -> list[tuple[int, list[tuple[int, bytes]], bool]]:
     """Commands sent once the session key is live.
 
@@ -343,6 +344,10 @@ def post_session_steps(
     charger additionally needs 0x0027 carrying the Anker account ID, which is
     why `user_id` exists at all — never hard-code a captured value, since the
     device ties personalized screen state to that identity.
+
+    Official `GCMUserAuthCmd` also has `A3 = password`. This A2687 firmware
+    applies settings with `A2` alone. Pass the raw TLV value (no type tag)
+    if a unit needs it.
     """
     steps = [
         (
@@ -356,5 +361,8 @@ def post_session_steps(
             encoded_user_id = user_id.encode("ascii")
         except UnicodeEncodeError as exc:
             raise ValueError("user ID must contain ASCII characters only") from exc
-        steps.append((0x0027, [(0xA1, epoch_bytes()), (0xA2, encoded_user_id)], False))
+        auth = [(0xA1, epoch_bytes()), (0xA2, encoded_user_id)]
+        if password is not None:
+            auth.append((0xA3, password))
+        steps.append((0x0027, auth, False))
     return steps

@@ -103,6 +103,7 @@ class Session:
         profile: DeviceProfile,
         on_frame: Callable[[int, bytes], None],
         user_id: Optional[str] = None,
+        auth_password: Optional[bytes] = None,
         stage: str = "full",
         record: Optional[str] = None,
         idle_timeout: float = 8.0,
@@ -111,6 +112,7 @@ class Session:
         self.profile = profile
         self.on_frame = on_frame
         self.user_id = user_id
+        self.auth_password = auth_password
         self.stage = stage
         self.idle_timeout = idle_timeout
         self._crypto = ff09.CryptoContext()
@@ -255,7 +257,9 @@ class Session:
         # 0x0027 carries the account ID. Both devices need it — the charger to
         # start streaming at all, the power bank to keep the session past 26 s.
         account_id = self.user_id if self.profile.needs_account_id else None
-        for command, tlv, _ in ff09.post_session_steps(account_id):
+        for command, tlv, _ in ff09.post_session_steps(
+            account_id, password=self.auth_password
+        ):
             await self.send(ff09.GROUP_SESSION, command, tlv)
             await asyncio.sleep(0.12)
 

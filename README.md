@@ -8,9 +8,10 @@ desk, which turned out to speak the same BLE protocol:
 | Prime Power Bank (20K, 220W) | A110G | battery %, per-port V/A/W both directions, totals, time to full, thermal state, 2 temperatures, Pomodoro timer |
 | Prime 160W charger | A2687 | per-port V/A/W, cable rating, fast-charge protocol, attached-device identity |
 
-Both push telemetry at roughly 1 Hz over BLE once a session is open. Everything
-here is **read-only**: the only writes are the session handshake and a status
-read. No control or settings command is implemented.
+Both push telemetry at roughly 1 Hz over BLE once a session is open. The usual
+writes are the session handshake and a status read. The charger can also select
+an already-uploaded custom screensaver (`0x021F`); listing and naming those
+pictures is HTTP, documented in [docs/screensaver.md](docs/screensaver.md).
 
 ## Why one repository
 
@@ -87,6 +88,8 @@ a command sits waiting.
 - **[docs/powerbank.md](docs/powerbank.md)** — A110G field map with the evidence
   for each field.
 - **[docs/charger.md](docs/charger.md)** — A2687 field map.
+- **[docs/screensaver.md](docs/screensaver.md)** — list and download the
+  charger's custom lock-screen pictures, then select one over BLE.
 - **[spec/](spec/)** — the cross-language contract: generated constants for
   Swift, and a decoded-state fixture per capture. Other implementations replay
   the fixtures and must reproduce them field for field, which is what stops a

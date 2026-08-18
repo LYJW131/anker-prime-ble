@@ -5,8 +5,8 @@ Ported from a Python service that in turn came from `AnkerPrimeWebBle_A2687.js`
 same interface the power bank decoder uses so one CLI can drive either. The
 cable-capability and charging-protocol tables below are that project's.
 
-Telemetry only. Nothing here changes a charger setting; the only writes are the
-session handshake and the `0x0200` status read.
+Mostly telemetry. The handshake and `0x0200` status read are the usual writes;
+`screensaver_select_tlv` builds the official `0x021F` cover-select body.
 """
 
 from __future__ import annotations
@@ -23,6 +23,9 @@ DEVICE_NAME_PREFIX = "ASHDJW"
 # Commands whose payload is a status snapshot rather than live per-port data.
 SNAPSHOT_COMMANDS = frozenset({0x0200, 0x0A00, 0x0040, 0x0405})
 REALTIME_COMMANDS = frozenset({0x020A, 0x0207, 0x0206, 0x4300, 0x0300, 0x0303, 0x0410})
+CMD_SET_SCREENSAVER = 0x021F
+SCREENSAVER_TYPE_CUSTOM = 3
+_SCREENSAVER_URL_KEY = b"\x00SmallChargingUrl"
 
 _PORT_STRUCT_TYPES = {0xA5: "C1", 0xA6: "C2", 0xA7: "C3"}
 _PORT_CABLE_TYPES = {0xAC: "C1", 0xAD: "C2", 0xAE: "C3"}
@@ -101,8 +104,10 @@ LEGACY_FIELD_NAMES = {
     0xA1: "state_code",
     0xA2: "serial_or_identifier",
     0xA4: "product_code",
+    0xA9: "screen_brightness",
     0xD0: "port_config_0",
     0xD1: "port_config_1",
+    0xE1: "screensaver",
     0xFD: "firmware_tag",
 }
 
@@ -111,6 +116,9 @@ LEGACY_FIELD_NAMES = {
 class ChargerState(DeviceState):
     product_code: Optional[str] = None
     firmware_tag: Optional[str] = None
+    screen_brightness: Optional[int] = None
+    screensaver_id: Optional[int] = None
+    screensaver_flags: Optional[int] = None
     total_output_power_w: Optional[float] = None
     raw_status: dict[str, str] = None  # type: ignore[assignment]
 
@@ -126,6 +134,9 @@ class ChargerState(DeviceState):
             {
                 "product_code": self.product_code,
                 "firmware_tag": self.firmware_tag,
+                "screen_brightness": self.screen_brightness,
+                "screensaver_id": self.screensaver_id,
+                "screensaver_flags": self.screensaver_flags,
                 "total_output_power_w": self.total_output_power_w,
             }
         )
@@ -138,6 +149,24 @@ class ChargerState(DeviceState):
         reading = PortReading(name=key)
         self.ports.append(reading)
         return reading
+
+
+def screensaver_select_tlv(picture_id: int, hash_code: int, saver_type: int = SCREENSAVER_TYPE_CUSTOM) -> list[tuple[int, bytes]]:
+    """Official 47-byte 0x021F body that selects an already-uploaded custom picture.
+
+    Recovered by XORing same-session official writes against the known 0x0300
+    header: A1=0x21, A3=typed-u8 type (3=custom), A4=typed-bytes id u32le,
+    A5=typed-bytes hash_code u32le, FD=text "SmallChargingUrl", FE=typed-u32
+    epoch. Slot index is not sent.
+    """
+    return [
+        (0xA1, b"\x21"),
+        (0xA3, bytes([0x01, saver_type & 0xFF])),
+        (0xA4, b"\x04" + struct.pack("<I", picture_id & 0xFFFFFFFF)),
+        (0xA5, b"\x04" + struct.pack("<I", hash_code & 0xFFFFFFFF)),
+        (0xFD, _SCREENSAVER_URL_KEY),
+        (0xFE, b"\x03" + ff09.epoch_bytes()),
+    ]
 
 
 def cable_profile(code: Optional[str]) -> Optional[tuple[str, Optional[str]]]:
@@ -241,6 +270,11 @@ def parse_realtime(payload: bytes, state: ChargerState) -> ChargerState:
             _apply_cable(state.port(key), fields[tlv_type])
 
     _apply_identity(fields, state)
+
+    e1 = fields.get(0xE1)
+    if e1 and len(e1.payload) >= 4:
+        state.screensaver_flags = struct.unpack_from("<H", e1.payload, 0)[0]
+        state.screensaver_id = struct.unpack_from("<H", e1.payload, 2)[0]
     return state
 
 
@@ -263,6 +297,8 @@ def parse_snapshot(payload: bytes, state: ChargerState) -> ChargerState:
             state.product_code = decoded.text
         elif tlv_type == 0xFD and decoded.text:
             state.firmware_tag = decoded.text
+        elif tlv_type == 0xA9 and decoded.u is not None:
+            state.screen_brightness = decoded.u
     state.raw_status = snapshot
 
     # The snapshot also carries live per-port structs on this firmware, which
@@ -294,6 +330,11 @@ def format_state(state: ChargerState) -> str:
     lines = [state.header()]
     if state.product_code:
         lines.append(f"  product {state.product_code}")
+    if state.screen_brightness is not None:
+        lines.append(f"  brightness {state.screen_brightness}%")
+    if state.screensaver_id is not None:
+        flags = state.screensaver_flags if state.screensaver_flags is not None else 0
+        lines.append(f"  screensaver id {state.screensaver_id} flags 0x{flags:04X}")
     if state.total_output_power_w is not None:
         lines.append(f"  total out {state.total_output_power_w:.1f}W")
     for port in state.ports:

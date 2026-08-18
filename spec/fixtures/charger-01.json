@@ -59,6 +59,9 @@
     ],
     "product_code": null,
     "firmware_tag": null,
+    "screen_brightness": null,
+    "screensaver_id": null,
+    "screensaver_flags": null,
     "total_output_power_w": null
    }
   },
@@ -119,6 +122,9 @@
     ],
     "product_code": null,
     "firmware_tag": null,
+    "screen_brightness": 100,
+    "screensaver_id": 24551,
+    "screensaver_flags": 896,
     "total_output_power_w": 89.15
    }
   }

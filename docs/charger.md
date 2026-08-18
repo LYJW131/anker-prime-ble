@@ -65,6 +65,16 @@ under `anker-user-id`, and this tooling reads `$ANKER_USER_ID` at runtime. It is
 deliberately absent from this repository, including from the captures — see
 `captures/README.md`.
 
+The pictures themselves are not on BLE. Listing, naming and downloading them is
+documented in [screensaver.md](screensaver.md). The charger reports the cloud
+picture id in `0xE1` (10-byte struct: flag word + id u16le + six zero bytes)
+and screen brightness 0–100 in snapshot TLV `0xA9`. `0x0204` with the official
+single-value envelope (`A1 21` + typed-u8 `A2` + `FE` timestamp) does change
+`0xA9`. The official select write is `0x021F` (group `0x0F`, 47-byte
+plaintext): type 3 + cloud `id` + `hash_code` + `SmallChargingUrl`, built by
+`screensaver_select_tlv`. `0x0027` `A3` (the official “password” field) is
+optional — settings writes apply with `A2` = account id alone.
+
 ### Other differences
 
 **No temperature.** The power bank reports two, the charger reports none — see
