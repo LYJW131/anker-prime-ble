@@ -5,8 +5,9 @@ Ported from a Python service that in turn came from `AnkerPrimeWebBle_A2687.js`
 same interface the power bank decoder uses so one CLI can drive either. The
 cable-capability and charging-protocol tables below are that project's.
 
-Mostly telemetry. The handshake and `0x0200` status read are the usual writes;
-`screensaver_select_tlv` builds the official `0x021F` cover-select body.
+Mostly telemetry. The handshake and `0x0200` status read are the usual writes.
+Screensaver writes: `0x021F` selects, `0x0220` starts a pixel transfer, `0x0221`
+sends 156-byte JPEG chunks.
 """
 
 from __future__ import annotations
@@ -24,7 +25,11 @@ DEVICE_NAME_PREFIX = "ASHDJW"
 SNAPSHOT_COMMANDS = frozenset({0x0200, 0x0A00, 0x0040, 0x0405})
 REALTIME_COMMANDS = frozenset({0x020A, 0x0207, 0x0206, 0x4300, 0x0300, 0x0303, 0x0410})
 CMD_SET_SCREENSAVER = 0x021F
+CMD_TRANSFER_START = 0x0220
+CMD_TRANSFER_DATA = 0x0221
 SCREENSAVER_TYPE_CUSTOM = 3
+SCREENSAVER_CHUNK = 156
+SCREENSAVER_ACK_EVERY = 10
 _SCREENSAVER_URL_KEY = b"\x00SmallChargingUrl"
 
 _PORT_STRUCT_TYPES = {0xA5: "C1", 0xA6: "C2", 0xA7: "C3"}
@@ -151,6 +156,17 @@ class ChargerState(DeviceState):
         return reading
 
 
+def screensaver_id_from_payload(payload: bytes) -> Optional[int]:
+    """Cloud picture id from a 0x0200 / 0x0300 body (TLV 0xE1, bytes 2–3 u16le)."""
+    for tlv_type, value in ff09.parse_tlv(payload, ff09.tlv_offset(payload)):
+        if tlv_type != 0xE1:
+            continue
+        body = ff09.read_typed_value(value).payload
+        if len(body) >= 4:
+            return struct.unpack_from("<H", body, 2)[0]
+    return None
+
+
 def screensaver_select_tlv(picture_id: int, hash_code: int, saver_type: int = SCREENSAVER_TYPE_CUSTOM) -> list[tuple[int, bytes]]:
     """Official 47-byte 0x021F body that selects an already-uploaded custom picture.
 
@@ -167,6 +183,56 @@ def screensaver_select_tlv(picture_id: int, hash_code: int, saver_type: int = SC
         (0xFD, _SCREENSAVER_URL_KEY),
         (0xFE, b"\x03" + ff09.epoch_bytes()),
     ]
+
+
+def screensaver_transfer_start_tlv(
+    picture_id: int,
+    hash_code: int,
+    file_size: int,
+    *,
+    chunk_size: int = SCREENSAVER_CHUNK,
+    chunk_count: int,
+    ack_every: int = SCREENSAVER_ACK_EVERY,
+) -> list[tuple[int, bytes]]:
+    """Official 49-byte 0x0220 body that starts a custom-cover pixel transfer.
+
+    Recovered from add-cover-0819.pklg by XORing the same-session 0x021F
+    (known 47-byte layout) onto the 75-byte 0x0220. A2=1, A3=id, A4=hash,
+    A5=JPEG size, A6=ACK every N chunks, A7=chunk payload, A8=chunk count.
+    """
+    return [
+        (0xA1, b"\x21"),
+        (0xA2, bytes([0x01, 0x01])),
+        (0xA3, b"\x04" + struct.pack("<I", picture_id & 0xFFFFFFFF)),
+        (0xA4, b"\x04" + struct.pack("<I", hash_code & 0xFFFFFFFF)),
+        (0xA5, b"\x03" + struct.pack("<I", file_size & 0xFFFFFFFF)),
+        (0xA6, bytes([0x01, ack_every & 0xFF])),
+        (0xA7, bytes([0x02]) + struct.pack("<H", chunk_size & 0xFFFF)),
+        (0xA8, bytes([0x02]) + struct.pack("<H", chunk_count & 0xFFFF)),
+        (0xFE, b"\x03" + ff09.epoch_bytes()),
+    ]
+
+
+def screensaver_chunk_tlv(seq: int, data: bytes) -> list[tuple[int, bytes]]:
+    """Official 167-byte 0x0221 body: A2=seq u16le, A3=0x04-tagged JPEG slice.
+
+    First official chunk starts `FF D8 FF E0 … JFIF`. Last chunk is zero-padded
+    to 156 bytes so every frame stays 193 bytes on the wire.
+    """
+    if len(data) > SCREENSAVER_CHUNK:
+        raise ValueError(f"screensaver chunk {len(data)} > {SCREENSAVER_CHUNK}")
+    payload = data + bytes(SCREENSAVER_CHUNK - len(data))
+    return [
+        (0xA1, b"\x21"),
+        (0xA2, bytes([0x02]) + struct.pack("<H", seq & 0xFFFF)),
+        (0xA3, b"\x04" + payload),
+    ]
+
+
+def screensaver_chunks(jpeg: bytes, chunk_size: int = SCREENSAVER_CHUNK) -> list[bytes]:
+    if not jpeg:
+        raise ValueError("empty JPEG")
+    return [jpeg[i : i + chunk_size] for i in range(0, len(jpeg), chunk_size)]
 
 
 def cable_profile(code: Optional[str]) -> Optional[tuple[str, Optional[str]]]:

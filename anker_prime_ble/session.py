@@ -10,7 +10,7 @@ import asyncio
 import json
 import logging
 import time
-from typing import Callable, Optional
+from typing import Awaitable, Callable, Optional
 
 from bleak import BleakClient, BleakScanner
 from bleak.backends.device import BLEDevice
@@ -308,7 +308,11 @@ class Session:
                 return
             self._last_frame_at = time.monotonic()
 
-    async def run(self, seconds: float) -> None:
+    async def run(
+        self,
+        seconds: float,
+        after_handshake: Optional[Callable[["Session"], Awaitable[None]]] = None,
+    ) -> None:
         async with BleakClient(self.device, timeout=25.0) as client:
             self._client = client
             self._pick_characteristics(client)
@@ -318,6 +322,8 @@ class Session:
             await self.handshake()
             log.info("handshake stage '%s' done; listening %.0fs", self.stage, seconds)
             self._last_frame_at = time.monotonic()
+            if after_handshake is not None:
+                await after_handshake(self)
             watchdog = asyncio.create_task(self._watchdog(self.idle_timeout))
             try:
                 deadline = time.monotonic() + seconds

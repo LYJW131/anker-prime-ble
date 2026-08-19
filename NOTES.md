@@ -230,11 +230,14 @@ two devices agreed on all of it.
 
 ## The charger's custom cover
 
-The A2687 can show one of eight custom pictures. The title and the JPEG live in
-Anker's cloud. The charger only stores the pixels and reports the current cloud
-id in snapshot TLV `0xE1`. Switching the current picture is a single BLE write,
-command `0x021F`, group `0x0F`. `docs/screensaver.md` is the recipe;
-this section is what it cost to get there.
+The A2687 can show a custom picture. The title and the JPEG live in Anker's
+cloud. This firmware keeps **four pixel slots** on the charger; a fifth add
+in the official app **re-uploads** (BLE transfer again, overwriting a slot)
+instead of allocating a fifth JPEG. The cloud list can still show more than
+four. The charger reports the current cloud id in snapshot TLV `0xE1`.
+Switching the current picture is a single BLE write, command `0x021F`,
+group `0x0F`. `docs/screensaver.md` is the recipe; this section is what it
+cost to get there.
 
 ### Tools that actually moved the work
 
@@ -272,8 +275,10 @@ appear on BLE.
 
 **`0x021F` ACKs garbage.** Every guessed 47-byte layout came back
 `00 A1 01 31`, including an empty GET. The ACK means the command exists, not
-that the body applied. Only a change in `0xE1` counts. Nearby opcodes
-`0x021D` / `0x0220` / `0x0221` reject with `04 A1 01 31`.
+that the body applied. Only a change in `0xE1` counts. Nearby `0x021D`
+still rejects with `04 A1 01 31`. `0x0220` / `0x0221` returned the same
+on empty or guessed bodies — they are the image-transfer commands, and
+they only apply with the official TLV.
 
 **Auth was not the gate.** Official `GCMUserAuthCmd` documents `0x0027`
 `A3 = password`. This firmware applies `0x0204` brightness (TLV `0xA9`,
@@ -327,12 +332,41 @@ arm64-only dumpers such as blutter never ran. Image transfer is a separate
 path (`action_start_transfer_screen_saver_image` and friends). Select of a
 picture that is already on the charger is the one 47-byte write; a picture
 that exists only in the cloud will ACK and stay put until the official app
-has pushed the pixels.
+has pushed the pixels. Official-app testing on this unit: **four on-device
+slots**. Adding a fifth re-uploads rather than growing the device set. That
+is how the 2026-08-19 add-cover capture was provoked. That trace recovered
+the pixel path: one `0x021F` (new id `45470`), one `0x0220` start (size
+25397, chunk 156, count 163, ACK every 10), then 163 `0x0221` writes.
+Same-session XOR against the known `0x021F` body opened `0x0220`; the
+first `0x0221` plaintext begins `FFD8…JFIF`. Cloud `hash_code` for that
+row is `0xc026bfef` (XOR of the last hash byte against a 0x0300 template
+was off by one). Do not commit that `.pklg` — it still holds a live
+session. Flooding all `0x0221` writes without waiting for the every-10
+ACK overruns the charger (`12 A1 01 31` still at index 10). Wait on
+every tenth chunk.
+
+**Uploading a new cover is two different transports.** Cloud
+`add_manual_clock_screensavers` only allocates `id` / `hash_code` / URL.
+The charger never fetches that URL. Pixels go over BLE
+(`action_start_transfer_screen_saver_image`, `sendImageDataGroup`). Existing
+HARs only have list/get_url. The Flutter map for add is `{sn?, img_url,
+hash_code}`; OSS writes start at `/app/cloudstor/get_app_up_token_general`
+and the response fields Flutter checks are `upToken` / `keyPrefix`. Live CN
+wants `{type: <int>, file_name}` and replies with snake_case `uptoken` (a
+signed PUT URL) and `key_prefix`. Types 4/6/7 work; 6 and 7 are the
+`edge-aiot` host. Official JPEGs are 240×240, not the 375 overlay, and
+`hash_code` is IEEE CRC-32 of those bytes (five/five). Passport login
+rate-limits at `100028`. Do not guess the BLE chunk opcode — `0x020C` is
+port-history, not image data, even though it uses the same `packageNumber` /
+`packageTotalNumber` names.
 
 ### What is now confirmed
 
 `charger.screensaver_select_tlv(id, hash_code)` is the official body.
 Live writes moved `0xE1` 45314 → 24551, 24551 → 45317, 45313 → 45410, and
-45410 → 24551. Listing is still HTTP
+45410 → 24551. Pixel transfer is `0x0220` + `0x0221`. Pushing FSF
+(`24551`, 20876 bytes) after the official `45470` add restored it and
+evicted `45313`, not the picture on screen. Pushing `45313` (18539 bytes)
+then showed that picture. Listing is still HTTP
 `/mini_power/v1/app/style/get_manual_clock_screensavers`. There is no HTTP
 "make this the current picture".

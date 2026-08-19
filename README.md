@@ -10,8 +10,9 @@ desk, which turned out to speak the same BLE protocol:
 
 Both push telemetry at roughly 1 Hz over BLE once a session is open. The usual
 writes are the session handshake and a status read. The charger can also select
-an already-uploaded custom screensaver (`0x021F`); listing and naming those
-pictures is HTTP, documented in [docs/screensaver.md](docs/screensaver.md).
+an already-uploaded custom screensaver (`0x021F`) and push JPEG pixels
+(`0x0220` / `0x0221`). Listing and naming those pictures is HTTP, documented
+in [docs/screensaver.md](docs/screensaver.md).
 
 ## Why one repository
 
@@ -25,8 +26,11 @@ anker_prime_ble/
 ├── decode.py     shared field annotator + differential tracker
 ├── device.py     shared port/state shapes and the device interface
 ├── session.py    shared BLE session, handshake driver, capture recording
-├── charger.py    A2687 telemetry decoding
+├── charger.py    A2687 telemetry + 0x021F select + 0x0220/0x0221 transfer
 ├── powerbank.py  A110G telemetry decoding
+├── cloud.py      Anker login, screensaver list, OSS token, add_manual
+├── image.py      240×240 JPEG crop + CRC32 hash_code
+├── cover.py      register a local image and push pixels over BLE
 └── cli.py        one CLI for both
 ```
 
@@ -50,6 +54,9 @@ Verified on CPython 3.14; any 3.11+ should work.
 .venv/bin/python -m anker_prime_ble watch  <addr>                 # only what changes
 .venv/bin/python -m anker_prime_ble session <addr> --record cap.jsonl
 .venv/bin/python -m anker_prime_ble replay cap.jsonl --decode     # offline, no radio
+.venv/bin/python -m anker_prime_ble covers list                   # cloud custom covers
+.venv/bin/python -m anker_prime_ble covers select <addr> --seq 1  # BLE, pixels already on the charger
+.venv/bin/python -m anker_prime_ble covers upload photo.jpg       # crop + cloud register; add --address to BLE-push
 ```
 
 `scan` guesses the device from its advertised name. Everything else takes
@@ -89,7 +96,8 @@ a command sits waiting.
   for each field.
 - **[docs/charger.md](docs/charger.md)** — A2687 field map.
 - **[docs/screensaver.md](docs/screensaver.md)** — list and download the
-  charger's custom lock-screen pictures, then select one over BLE.
+  charger's custom lock-screen pictures, select one over BLE, and the
+  unfinished local-image upload path.
 - **[spec/](spec/)** — the cross-language contract: generated constants for
   Swift, and a decoded-state fixture per capture. Other implementations replay
   the fixtures and must reproduce them field for field, which is what stops a
